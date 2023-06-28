@@ -3,7 +3,6 @@
 namespace App\Controllers;
 
 use App\Core\App;
-use Error;
 
 class ProductController
 {

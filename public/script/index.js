@@ -2,7 +2,7 @@ const savebtn = document.getElementById("save");
 const switcher = document.getElementById("productType");
 
 switcher.addEventListener("change", (e) => {
-    let listOfValues = ["dvd", "book", "furniture"];
+    let listOfValues = ["dvd", "furniture", "book"];
     document.getElementById(e.target.value).classList.remove("hidden");
 
     let indexToRemove = listOfValues.indexOf(e.target.value);
@@ -12,9 +12,15 @@ switcher.addEventListener("change", (e) => {
 
     listOfValues.map((atr) => {
         document.getElementById(atr).classList.add("hidden");
-        document.querySelector(`#${atr} input`).value = null;
-        console.log(document.getElementById(atr).value);
+        document.querySelector(`#${atr} input`).value = 0;
     });
+
+    if (e.target.value === "furniture") {
+        document.getElementById("height").value = 0;
+        document.getElementById("width").value = 0;
+        document.getElementById("length").value = 0;
+    }
+
 });
 
 savebtn.addEventListener("click", (e) => {

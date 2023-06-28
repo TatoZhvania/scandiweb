@@ -9,11 +9,14 @@ form.addEventListener("submit", function (event) {
         method: "POST",
         body: formData,
     })
-        .then((response) => response.json())
+        .then((response) => {
+            console.log(response);
+            return response.json();
+        })
         .then((data) => {
             console.log(data);
             if (data["success"] === true) {
-                console.log("Product added successfully!");
+                // console.log("Product added successfully!");
                 window.location.href = "/";
             } else {
                 const errorMessage = document.getElementById("sku-message");
