@@ -12,14 +12,22 @@ switcher.addEventListener("change", (e) => {
 
     listOfValues.map((atr) => {
         document.getElementById(atr).classList.add("hidden");
-        document.querySelector(`#${atr} input`).value = 0;
+        const inputs = document.querySelectorAll(`#${atr} input`);
+        inputs.forEach((input) => {
+            input.value = 0;
+        });
     });
 
-    if (e.target.value === "furniture") {
-        document.getElementById("height").value = 0;
-        document.getElementById("width").value = 0;
-        document.getElementById("length").value = 0;
-    }
+    // Set all inputs to 0 for the selected type
+    const currentInputs = document.querySelectorAll(`#${e.target.value} input`);
+    currentInputs.forEach((input) => {
+        input.value = 0;
+        input.addEventListener("focus", () => {
+            if (input.value === "0") {
+                input.value = "";
+            }
+        });
+    });
 
 });
 
