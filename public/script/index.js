@@ -12,10 +12,6 @@ switcher.addEventListener("change", (e) => {
 
     listOfValues.map((atr) => {
         document.getElementById(atr).classList.add("hidden");
-        const inputs = document.querySelectorAll(`#${atr} input`);
-        inputs.forEach((input) => {
-            input.value = 0;
-        });
     });
 
     // Set all inputs to 0 for the selected type
