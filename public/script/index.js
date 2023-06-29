@@ -1,30 +1,33 @@
 const savebtn = document.getElementById("save");
 const switcher = document.getElementById("productType");
 
+
+const inputFields = {
+    dvd: ["size"],
+    furniture: ["height", "width", "length"],
+    book: ["weight"],
+};
+
 switcher.addEventListener("change", (e) => {
-    let listOfValues = ["dvd", "furniture", "book"];
+    // Remove "hidden" class from the selected type
     document.getElementById(e.target.value).classList.remove("hidden");
 
-    let indexToRemove = listOfValues.indexOf(e.target.value);
-    if (indexToRemove > -1) {
-        listOfValues.splice(indexToRemove, 1);
+    // Add "hidden" class to other types and reset their input values
+    for (const type in inputFields) {
+        if (type !== e.target.value) {
+            document.getElementById(type).classList.add("hidden");
+            inputFields[type].forEach((field) => {
+                document.getElementById(field).value = 0;
+            });
+        }
     }
 
-    listOfValues.map((atr) => {
-        document.getElementById(atr).classList.add("hidden");
-    });
-
     // Set all inputs to 0 for the selected type
-    const currentInputs = document.querySelectorAll(`#${e.target.value} input`);
-    currentInputs.forEach((input) => {
-        input.value = 0;
-        input.addEventListener("focus", () => {
-            if (input.value === "0") {
-                input.value = "";
-            }
-        });
+    inputFields[e.target.value].forEach((field) => {
+        const input = document.getElementById(field);
+        input.value = null;
+        input.required = true;
     });
-
 });
 
 savebtn.addEventListener("click", (e) => {
